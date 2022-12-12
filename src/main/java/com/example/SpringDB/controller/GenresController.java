@@ -1,8 +1,6 @@
 package com.example.SpringDB.controller;
 
-import com.example.SpringDB.entity.Artist;
 import com.example.SpringDB.entity.Genre;
-import com.example.SpringDB.service.ArtistsService;
 import com.example.SpringDB.service.GenresService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -11,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/genres")
 @CrossOrigin
-class GenreController {
+class GenresController {
 
         @Autowired
         private GenresService genresService;
