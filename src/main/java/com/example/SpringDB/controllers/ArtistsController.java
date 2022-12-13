@@ -14,13 +14,13 @@ class ArtistsController {
         @Autowired
         private ArtistsService artistsService;
 
-        @PostMapping("/add")
+        @PostMapping("")
         public String addArtist(@RequestBody Artist artist) {
             artistsService.saveArtist(artist);
             return "New artist added";
         }
 
-        @PostMapping("/delete")
+        @DeleteMapping("")
         public String removeArtist(@RequestBody Integer artistId) {
             return artistsService.deleteArtist(artistId);
         }

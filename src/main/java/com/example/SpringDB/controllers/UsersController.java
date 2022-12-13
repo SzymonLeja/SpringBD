@@ -13,12 +13,12 @@ public class UsersController {
     @Autowired
     private UsersService usersService;
 
-    @PostMapping("/add")
+    @PostMapping("")
     public String addUser(@RequestBody User user) {
         return usersService.saveUser(user);
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("")
     public String deleteUser(@RequestBody Integer userId) {
         return usersService.deleteUser(userId);
     }

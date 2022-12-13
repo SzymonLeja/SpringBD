@@ -14,12 +14,12 @@ public class PlaylistsController {
     @Autowired
     private PlaylistsService playlistsService;
 
-    @PostMapping("/add")
+    @PostMapping("")
     public String addPlaylist(@RequestBody Playlist playlist) {
         return playlistsService.savePlaylist(playlist);
     }
 
-    @PostMapping("/delete")
+    @DeleteMapping("")
     public String deletePlaylist(@RequestBody Integer playlistId) {
         return playlistsService.deletePlaylist(playlistId);
     }

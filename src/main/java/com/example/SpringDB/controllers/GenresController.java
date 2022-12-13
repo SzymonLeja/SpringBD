@@ -14,12 +14,12 @@ class GenresController {
         @Autowired
         private GenresService genresService;
 
-        @PostMapping("/add")
+        @PostMapping("")
         public String addGenre(@RequestBody Genre genre) {
             return genresService.saveGenre(genre);
         }
 
-        @PostMapping("/delete")
+        @DeleteMapping("")
         public String deleteGenre(@RequestBody Integer genreId) {
             return genresService.deleteGenre(genreId);
         }
