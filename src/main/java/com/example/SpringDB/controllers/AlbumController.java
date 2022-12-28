@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/albums")
-class AlbumsController {
+@RequestMapping("/album")
+class AlbumController {
 
     @Autowired
     private AlbumsService albumsService;

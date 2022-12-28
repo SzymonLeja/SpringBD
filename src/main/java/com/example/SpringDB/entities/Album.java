@@ -28,4 +28,8 @@ public class Album {
         this.artist = new Artist();
         artist.setId_artist(artistId);
     }
+
+    public String getAlbum_name() {
+        return title;
+    }
 }

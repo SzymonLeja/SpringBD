@@ -37,4 +37,9 @@ public class Song {
         this.genre = new Genre();
         genre.setId_genre(genreId);
     }
+
+    @Override
+    public String toString() {
+        return  "\n{\nid: " + id_song + ",\nsong_name: " + song_name + ",\nalbum: " + album.getAlbum_name() + ",\ngenre: " + genre.getGenre_name() + ",\ntime: " + time + ",\nsize: " + size + "\n}\n";
+    }
 }

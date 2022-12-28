@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/genres")
+@RequestMapping("/genre")
 @CrossOrigin
-class GenresController {
+class GenreController {
 
         @Autowired
         private GenresService genresService;

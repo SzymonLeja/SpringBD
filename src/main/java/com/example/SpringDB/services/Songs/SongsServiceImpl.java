@@ -5,6 +5,8 @@ import com.example.SpringDB.repositories.SongsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SongsServiceImpl implements SongsService {
     @Autowired
@@ -15,6 +17,7 @@ public class SongsServiceImpl implements SongsService {
         songsRepository.save(song);
         return "Playlist added";
     }
+
     @Override
     public String deleteSong(Integer songId) {
         if(songsRepository.existsById(songId)) {
@@ -25,4 +28,22 @@ public class SongsServiceImpl implements SongsService {
         }
     }
 
+    @Override
+    public String updateSong(Song song) {
+        if(songsRepository.existsById(song.getId_song())) {
+            songsRepository.save(song);
+            return "Playlist updated";
+        } else {
+            return "There is no playlist with id " + song.getId_song();
+        }
+    }
+
+    @Override
+    public Song getSong(Integer songId) {
+        return songsRepository.findById(songId).get();
+    }
+
+    public List<Song> getSongsRepository() {
+        return songsRepository.count() > 0 ? songsRepository.findAll() : null;
+    }
 }

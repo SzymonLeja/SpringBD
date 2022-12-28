@@ -7,9 +7,9 @@ import org.springframework.web.bind.annotation.*;
 
 
 @RestController
-@RequestMapping("/artists")
+@RequestMapping("/artist")
 @CrossOrigin
-class ArtistsController {
+class ArtistController {
 
         @Autowired
         private ArtistsService artistsService;

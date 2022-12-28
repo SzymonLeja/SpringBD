@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/playlists")
+@RequestMapping("/playlist")
 @CrossOrigin
-public class PlaylistsController {
+public class PlaylistController {
 
     @Autowired
     private PlaylistsService playlistsService;

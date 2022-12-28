@@ -17,4 +17,8 @@ public class Genre {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id_genre;
     private String name;
+
+    public String getGenre_name() {
+        return name;
+    }
 }
