@@ -23,4 +23,12 @@ public class UserController {
         return usersService.deleteUser(userId);
     }
 
+    @GetMapping("")
+    public String getUser(Integer userId) {
+        return usersService.getUser(userId).toString();
+    }
+    @PutMapping("")
+    public String updateUser(@RequestBody User user) {
+        return usersService.updateUser(user);
+    }
 }

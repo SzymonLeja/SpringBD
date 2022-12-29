@@ -6,8 +6,10 @@ import com.example.SpringDB.services.Playlists.PlaylistsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/playlist")
+@RequestMapping("/playlists")
 @CrossOrigin
 public class PlaylistController {
 
@@ -24,7 +26,13 @@ public class PlaylistController {
         return playlistsService.deletePlaylist(playlistId);
     }
 
+    @GetMapping("")
+    public List<Playlist> getPlaylist(@RequestBody String playlistName) {
+        return playlistsService.getPlaylist(playlistName);
+    }
 
-
-
+    @PutMapping("")
+    public String updatePlaylist(@RequestBody Playlist playlist) {
+        return playlistsService.updatePlaylist(playlist);
+    }
 }

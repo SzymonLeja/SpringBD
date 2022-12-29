@@ -3,11 +3,14 @@ package com.example.SpringDB.controllers;
 
 import com.example.SpringDB.entities.Song;
 import com.example.SpringDB.services.Songs.SongsService;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
-@RequestMapping("/song")
+@RequestMapping("/songs")
 @CrossOrigin
 public class SongController {
 
@@ -20,8 +23,8 @@ public class SongController {
     }
 
     @GetMapping("")
-    public Song getSong(@RequestBody Integer songId) {
-        return songsService.getSong(songId);
+    public List<Song> getSong(@RequestBody String songName) {
+        return songsService.getSong(songName);
     }
 
     @PutMapping("")
@@ -34,9 +37,8 @@ public class SongController {
         return songsService.deleteSong(playlistId);
     }
 
-
-
-
-
-
+    @GetMapping("/all")
+    public List<Song> getAllSongs() {
+        return songsService.getSongsRepository();
+    }
 }

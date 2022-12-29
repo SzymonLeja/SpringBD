@@ -5,6 +5,8 @@ import com.example.SpringDB.repositories.GenresRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class GenresServiceImpl implements GenresService {
@@ -26,5 +28,20 @@ public class GenresServiceImpl implements GenresService {
         } else {
             return "There is no genre with id " + genreId;
         }
+    }
+
+    @Override
+    public String updateGenre(Genre genre) {
+        if(genresRepository.existsById(genre.getId_genre())) {
+            genresRepository.findById(genre.getId_genre()).get().updateGenre(genre);
+            return "Genre updated";
+        } else {
+            return "There is no genre with id " + genre.getId_genre();
+        }
+    }
+
+    @Override
+    public List<Genre> getGenre(String genreName) {
+        return genresRepository.findByNameContaining(genreName);
     }
 }

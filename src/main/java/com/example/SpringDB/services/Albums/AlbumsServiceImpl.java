@@ -6,6 +6,8 @@ import com.example.SpringDB.repositories.ArtistsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class AlbumsServiceImpl implements AlbumsService {
@@ -35,4 +37,25 @@ public class AlbumsServiceImpl implements AlbumsService {
             return "Album removed";
         }
     }
+
+    @Override
+    public List<Album> getAlbum(String albumName) {
+        return albumsRepository.findByTitleContaining(albumName);
+    }
+
+    @Override
+    public String updateAlbum(Album album) {
+        if(!albumsRepository.findById(album.getId_album()).isPresent()) {
+            return "There is no album with id " + album.getId_album();
+        } else {
+            albumsRepository.findById(album.getId_album()).get().updateSong(album);
+            return "Album updated";
+        }
+    }
+
+    @Override
+    public List<Album> getAlbumsRepository() {
+        return albumsRepository.count() > 0 ? albumsRepository.findAll() : null;
+    }
+
 }

@@ -27,5 +27,21 @@ public class UsersServiceImpl implements UsersService {
         }
     }
 
+    @Override
+    public User getUser(Integer userId) {
+        return usersRepository.findById(userId).get();
+    }
+
+    @Override
+    public String updateUser(User user) {
+        if(usersRepository.findById(user.getId_user()).isPresent()){
+            usersRepository.findById(user.getId_user()).get().updateUser(user);
+            return "User updated";
+        } else {
+            return "There is no user with id " + user.getId_user();
+        }
+    }
+
+
 
 }

@@ -5,9 +5,11 @@ import com.example.SpringDB.services.Artists.ArtistsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController
-@RequestMapping("/artist")
+@RequestMapping("/artists")
 @CrossOrigin
 class ArtistController {
 
@@ -23,5 +25,20 @@ class ArtistController {
         @DeleteMapping("")
         public String removeArtist(@RequestBody Integer artistId) {
             return artistsService.deleteArtist(artistId);
+        }
+
+        @GetMapping("")
+        public List<Artist> getArtist(String artistName) {
+            return artistsService.getArtist(artistName);
+        }
+
+        @PutMapping("")
+        public String updateArtist(@RequestBody Artist artist) {
+            return artistsService.updateArtist(artist);
+        }
+
+        @GetMapping("/all")
+        public List<Artist> getAllArtists() {
+            return artistsService.getAllArtists();
         }
 }

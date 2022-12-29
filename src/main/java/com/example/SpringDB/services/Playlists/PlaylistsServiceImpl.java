@@ -5,6 +5,8 @@ import com.example.SpringDB.repositories.PlaylistsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PlaylistsServiceImpl implements PlaylistsService {
     @Autowired
@@ -24,6 +26,21 @@ public class PlaylistsServiceImpl implements PlaylistsService {
         } else {
             return "There is no playlist with id " + playlistId;
         }
+    }
+
+    @Override
+    public String updatePlaylist(Playlist playlist) {
+        if(playlistsRepository.existsById(playlist.getId_playlist())) {
+            playlistsRepository.findById(playlist.getId_playlist()).get().updatePlaylist(playlist);
+            return "Playlist updated";
+        } else {
+            return "There is no playlist with id " + playlist.getId_playlist();
+        }
+    }
+
+    @Override
+    public List<Playlist> getPlaylist(String playlistName) {
+        return playlistsRepository.findByNameContaining(playlistName);
     }
 
 }

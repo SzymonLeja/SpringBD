@@ -21,4 +21,10 @@ public class User {
     private String user_name;
     private String password;
 
+    public void updateUser(User user) {
+        this.type = user.getType() == null ? this.type : user.getType();
+        this.name = user.getName() == null ? this.name : user.getName();
+        this.user_name = user.getUser_name() == null ? this.user_name : user.getUser_name();
+        this.password = user.getPassword() == null ? this.password : user.getPassword();
+    }
 }

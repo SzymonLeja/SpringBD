@@ -21,4 +21,8 @@ public class Genre {
     public String getGenre_name() {
         return name;
     }
+
+    public void updateGenre(Genre genre) {
+        this.name = genre.getName() == null ? this.name : genre.getName();
+    }
 }

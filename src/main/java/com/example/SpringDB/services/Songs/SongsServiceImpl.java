@@ -39,8 +39,8 @@ public class SongsServiceImpl implements SongsService {
     }
 
     @Override
-    public Song getSong(Integer songId) {
-        return songsRepository.findById(songId).get();
+    public List<Song> getSong(String songTitle) {
+        return songsRepository.findBySongNameContaining(songTitle);
     }
 
     public List<Song> getSongsRepository() {

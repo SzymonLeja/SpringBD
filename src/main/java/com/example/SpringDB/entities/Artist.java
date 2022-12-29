@@ -18,4 +18,7 @@ public class Artist {
     private Integer id_artist;
     private String name;
 
+    public void updateArtist(Artist artist) {
+        this.name = artist.getName() == null ? this.name : artist.getName();
+    }
 }

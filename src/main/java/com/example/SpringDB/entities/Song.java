@@ -21,7 +21,8 @@ public class Song {
     @ManyToOne
     @JoinColumn(name = "id_album")
     private Album album;
-    private String song_name;
+
+    private String songName;
     @NonNull
     @ManyToOne
     @JoinColumn(name = "id_genre")
@@ -40,6 +41,6 @@ public class Song {
 
     @Override
     public String toString() {
-        return  "\n{\nid: " + id_song + ",\nsong_name: " + song_name + ",\nalbum: " + album.getAlbum_name() + ",\ngenre: " + genre.getGenre_name() + ",\ntime: " + time + ",\nsize: " + size + "\n}\n";
+        return  "\n{\nid: " + id_song + ",\nsongName: " + songName + ",\nalbum: " + album.getAlbum_name() + ",\ngenre: " + genre.getGenre_name() + ",\ntime: " + time + ",\nsize: " + size + "\n}\n";
     }
 }
