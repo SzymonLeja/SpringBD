@@ -30,4 +30,26 @@ build/
 !**/src/test/**/build/
 
 ### VS Code ###
-.vscode/
+/reactApp/springapp/.vscode/
+
+# dependencies
+/reactApp/springapp/node_modules
+/reactApp/springapp/.pnp
+/reactApp/springapp/.pnp.js
+
+# testing
+/reactApp/springapp/coverage
+
+# production
+/reactApp/springapp/build
+
+# misc
+/reactApp/springapp/.DS_Store
+/reactApp/springapp/.env.local
+/reactApp/springapp/.env.development.local
+/reactApp/springapp/.env.test.local
+/reactApp/springapp/.env.production.local
+
+/reactApp/springapp/npm-debug.log*
+/reactApp/springapp/yarn-debug.log*
+/reactApp/springapp/yarn-error.log*
