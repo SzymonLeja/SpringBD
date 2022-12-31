@@ -42,6 +42,7 @@ const ArtistsList = () => {
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [openDialog, setOpenDialog] = useState(false);
     const [openAddDialog, setOpenAddDialog] = useState(false);
+    const [fetchData, setFetchData] = useState(true);
 
     const [activeArtist, setActiveArtist] = useState({
         id_artist: 0,
@@ -127,8 +128,11 @@ const ArtistsList = () => {
         }
         axios.post('http://localhost:8080/artists', tempArtist)
             .then(res => {
+                axios.get('http://localhost:8080/artists/all')
+                    .then(res => {
+                        setArtists(res.data);
+                    })
                 console.log(res.data);
-                setArtists([...artists, res.data]);
                 handleCloseAddDialog();
             });
     }
@@ -156,7 +160,7 @@ const ArtistsList = () => {
             <div style={{ display: 'flex', height: '100%', width: '100%' }}>
                 <div style={{ flexGrow: 1 }}>
                     <DataGrid
-
+                        style={{ width: "80%", margin: "auto", height: "80vh"}}
                         className={classes.root}
                         rows={filteredArtists}
                         columns={columns}
@@ -171,6 +175,7 @@ const ArtistsList = () => {
                         onPageChange={handlePageChange}
                         onRowsPerPageChange={handleRowsPerPageChange}
                         page={page}
+                        
                         components={{
                             Toolbar: () => (
                                 <div>
@@ -182,7 +187,7 @@ const ArtistsList = () => {
                                     value={search}
                                     onChange={handleSearch}
                                 />  
-                                <Button onClick={handleOpenAddDialog}>Add</Button>
+                                <Button variant="contained" style={{marginTop: "px"}} onClick={handleOpenAddDialog}>Add</Button>
                                 </div>
 
                             )
