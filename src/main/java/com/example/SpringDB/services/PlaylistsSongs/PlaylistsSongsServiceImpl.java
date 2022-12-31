@@ -36,7 +36,7 @@ public class PlaylistsSongsServiceImpl implements PlaylistsSongsService {
     @Override
     public String updatePlaylistSong(PlaylistSong playlistSong) {
         if(playlistsSongsRepository.existsById(playlistSong.getId_playlist_song())) {
-            playlistsSongsRepository.findById(playlistSong.getId_playlist_song()).get().updatePlaylistSong(playlistSong);
+            playlistsSongsRepository.save(playlistSong);
             return "Playlist updated";
         } else {
             return "There is no playlist with id " + playlistSong.getId_playlist_song();

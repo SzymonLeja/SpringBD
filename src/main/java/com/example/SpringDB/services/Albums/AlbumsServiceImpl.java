@@ -48,7 +48,7 @@ public class AlbumsServiceImpl implements AlbumsService {
         if(!albumsRepository.findById(album.getId_album()).isPresent()) {
             return "There is no album with id " + album.getId_album();
         } else {
-            albumsRepository.findById(album.getId_album()).get().updateSong(album);
+            albumsRepository.save(album);
             return "Album updated";
         }
     }

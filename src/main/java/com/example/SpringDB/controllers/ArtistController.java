@@ -23,8 +23,8 @@ class ArtistController {
         }
 
         @DeleteMapping("")
-        public String removeArtist(@RequestBody Integer artistId) {
-            return artistsService.deleteArtist(artistId);
+        public String removeArtist(@RequestBody String artistId) {
+            return artistsService.deleteArtist(Integer.parseInt(artistId));
         }
 
         @GetMapping("")

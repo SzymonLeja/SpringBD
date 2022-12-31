@@ -33,8 +33,4 @@ public class Album {
         return title;
     }
 
-    public void updateSong(Album album) {
-        this.title = album.getTitle() == null ? this.title : album.getTitle();
-        this.artist = album.getArtist() == null ? this.artist : album.getArtist();
-    }
 }

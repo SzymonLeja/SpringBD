@@ -35,7 +35,7 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public String updateUser(User user) {
         if(usersRepository.findById(user.getId_user()).isPresent()){
-            usersRepository.findById(user.getId_user()).get().updateUser(user);
+            usersRepository.save(user);
             return "User updated";
         } else {
             return "There is no user with id " + user.getId_user();

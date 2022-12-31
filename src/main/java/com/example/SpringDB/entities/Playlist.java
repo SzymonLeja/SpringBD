@@ -25,9 +25,5 @@ public class Playlist {
         user.setId_user(userId);
     }
 
-    public void updatePlaylist(Playlist playlist) {
 
-        this.name = playlist.getName() == null ? this.name : playlist.getName();
-        this.user = playlist.getUser() == null ? this.user : playlist.getUser();
-    }
 }

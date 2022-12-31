@@ -37,8 +37,8 @@ public class ArtistsServiceImpl implements ArtistsService {
     @Override
     public String updateArtist(Artist artist) {
         if (!artistsRepository.findById(artist.getId_artist()).isEmpty()) {
-            artistsRepository.findById(artist.getId_artist()).get().updateArtist(artist);
-            return "Artist updated";
+            artistsRepository.save(artist);
+            return artist.getId_artist() + " updated";
         } else {
             return "Artist not found";
         }

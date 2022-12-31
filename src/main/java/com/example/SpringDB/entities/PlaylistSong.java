@@ -31,8 +31,4 @@ public class PlaylistSong {
         song.setId_song(songId);
     }
 
-    public void updatePlaylistSong(PlaylistSong playlistSong) {
-        this.playlist = playlistSong.getPlaylist() == null ? this.playlist : playlistSong.getPlaylist();
-        this.song = playlistSong.getSong() == null ? this.song : playlistSong.getSong();
-    }
 }
