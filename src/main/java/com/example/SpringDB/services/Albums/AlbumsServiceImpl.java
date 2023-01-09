@@ -55,7 +55,7 @@ public class AlbumsServiceImpl implements AlbumsService {
 
     @Override
     public List<Album> getAlbumsRepository() {
-        return albumsRepository.count() > 0 ? albumsRepository.findAll() : null;
+        return albumsRepository.findAll();
     }
 
 }

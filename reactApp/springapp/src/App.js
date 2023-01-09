@@ -3,9 +3,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
-import AddArtist from './components/AddArtist';
-import Login from './components/AddArtist';
 import ArtistsList from './components/ArtistsList';
+import SongsList from './components/SongsList';
+import AlbumsList from './components/AlbumsList';
+import axios from 'axios';
 
 function App() {
 
@@ -15,7 +16,9 @@ function App() {
       <div>
         <Routes>
           <Route exact path={"/artists"} element={<ArtistsList/>} />
-          <Route exact path={"/artists/add"} element={<AddArtist/>} />
+          <Route exact path={"/songs"} element={<SongsList/>} />
+          <Route exact path={"/albums"} element={<AlbumsList/>} />
+
         </Routes>
       </div>
     </Router>

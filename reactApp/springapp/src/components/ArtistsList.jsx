@@ -42,7 +42,6 @@ const ArtistsList = () => {
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [openDialog, setOpenDialog] = useState(false);
     const [openAddDialog, setOpenAddDialog] = useState(false);
-    const [fetchData, setFetchData] = useState(true);
 
     const [activeArtist, setActiveArtist] = useState({
         id_artist: 0,
@@ -161,11 +160,11 @@ const ArtistsList = () => {
                 <div style={{ flexGrow: 1 }}>
                     <DataGrid
                         style={{ width: "80%", margin: "auto", height: "80vh"}}
-                        className={classes.root}
                         rows={filteredArtists}
                         columns={columns}
                         pageSize={rowsPerPage}
                         rowsPerPageOptions={[5, 10, 20]}
+                        checkboxSelection
                         disableSelectionOnClick
                         getRowId={(row) => row.id_artist}
                         //onRowClick display modal with edit and delete buttons
@@ -187,7 +186,7 @@ const ArtistsList = () => {
                                     value={search}
                                     onChange={handleSearch}
                                 />  
-                                <Button variant="contained" style={{marginTop: "px"}} onClick={handleOpenAddDialog}>Add</Button>
+                                <Button variant="contained" style={{marginTop: "10px"}} onClick={handleOpenAddDialog}>Add</Button>
                                 </div>
 
                             )
