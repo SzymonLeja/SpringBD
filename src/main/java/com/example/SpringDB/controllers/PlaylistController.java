@@ -26,9 +26,10 @@ public class PlaylistController {
         return playlistsService.deletePlaylist(playlistId);
     }
 
-    @GetMapping("")
-    public List<Playlist> getPlaylist(@RequestBody String playlistName) {
-        return playlistsService.getPlaylist(playlistName);
+    @GetMapping(value="/{userId}")
+    @ResponseBody
+    public List<Playlist> getPlaylist(@PathVariable("userId") Integer userId) {
+        return playlistsService.getPlaylist(userId);
     }
 
     @PutMapping("")
