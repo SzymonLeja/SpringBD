@@ -11,5 +11,5 @@ import java.util.List;
 public
 interface PlaylistsRepository extends JpaRepository<Playlist, Integer> {
 
-    List<Playlist> findByUser_Id_user(Integer userId);
+    //List<Playlist> findByUser_Id_user(Integer userId);
 }

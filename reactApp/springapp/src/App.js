@@ -8,9 +8,9 @@ import SongsList from './components/SongsList';
 import AlbumsList from './components/AlbumsList';
 import LoginSite from './components/LoginSite';
 import UserPlaylists from "./components/UserPlaylists";
+import PlayerSite from "./Player/PlayerSite";
 
 function App() {
-
 
   return (
     <Router>
@@ -21,6 +21,8 @@ function App() {
           <Route exact path={"/albums"} element={<AlbumsList/>} />
           <Route exact path={"/login"} element={<LoginSite/>} />
           <Route exact path={"/playlists"} element={<UserPlaylists/>} />
+          <Route exact path={"/playersite"} element={<PlayerSite/>} />
+
 
         </Routes>
       </div>
