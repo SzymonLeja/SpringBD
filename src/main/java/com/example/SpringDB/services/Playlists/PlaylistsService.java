@@ -10,5 +10,5 @@ public interface PlaylistsService {
 
     public String updatePlaylist(Playlist playlist);
 
-    public List<Playlist> getPlaylist(String playlistName);
+    //public List<Playlist> getPlaylist(Integer userId);
 }

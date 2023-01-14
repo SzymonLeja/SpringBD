@@ -6,10 +6,11 @@ import './App.css';
 import ArtistsList from './components/ArtistsList';
 import SongsList from './components/SongsList';
 import AlbumsList from './components/AlbumsList';
-import axios from 'axios';
+import LoginSite from './components/LoginSite';
+import UserPlaylists from "./components/UserPlaylists";
+import PlayerSite from "./Player/PlayerSite";
 
 function App() {
-
 
   return (
     <Router>
@@ -18,6 +19,10 @@ function App() {
           <Route exact path={"/artists"} element={<ArtistsList/>} />
           <Route exact path={"/songs"} element={<SongsList/>} />
           <Route exact path={"/albums"} element={<AlbumsList/>} />
+          <Route exact path={"/login"} element={<LoginSite/>} />
+          <Route exact path={"/playlists"} element={<UserPlaylists/>} />
+          <Route exact path={"/playersite"} element={<PlayerSite/>} />
+
 
         </Routes>
       </div>

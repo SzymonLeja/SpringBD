@@ -2,6 +2,7 @@ package com.example.SpringDB.services.Playlists;
 
 import com.example.SpringDB.entities.Playlist;
 import com.example.SpringDB.repositories.PlaylistsRepository;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,9 +39,9 @@ public class PlaylistsServiceImpl implements PlaylistsService {
         }
     }
 
-    @Override
-    public List<Playlist> getPlaylist(String playlistName) {
-        return playlistsRepository.findByNameContaining(playlistName);
-    }
+//    @Override
+//    public List<Playlist> getPlaylist(Integer userId) {
+//        return playlistsRepository.findByUser_Id_user(userId);
+//    }
 
 }
