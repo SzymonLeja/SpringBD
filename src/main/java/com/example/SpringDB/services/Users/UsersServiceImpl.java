@@ -28,17 +28,17 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public User getUser(Integer userId) {
-        return usersRepository.findById(userId).get();
+    public User getUser(String userName) {
+        return usersRepository.findByUserName(userName);
     }
 
     @Override
     public String updateUser(User user) {
-        if(usersRepository.findById(user.getId_user()).isPresent()){
+        if(usersRepository.findById(user.getIdUser()).isPresent()){
             usersRepository.save(user);
             return "User updated";
         } else {
-            return "There is no user with id " + user.getId_user();
+            return "There is no user with id " + user.getIdUser();
         }
     }
 

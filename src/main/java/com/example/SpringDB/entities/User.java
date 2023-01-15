@@ -15,10 +15,10 @@ import lombok.Setter;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_user;
+    private Integer idUser;
     private String type;
     private String name;
-    private String user_name;
+    private String userName;
     private String password;
 
 }

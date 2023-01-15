@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
-import sound from './metallica.mp3';
 
 
 function PlayerSite() {
 
-    const audioTune = new Audio(sound);
+    const audioTune = new Audio("/metallica.mp3");
+    console.log(audioTune);
 
     const [playInLoop, setPlayInLoop] = useState(false);
 

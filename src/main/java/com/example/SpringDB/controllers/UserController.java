@@ -13,22 +13,25 @@ public class UserController {
     @Autowired
     private UsersService usersService;
 
+    @CrossOrigin
     @PostMapping("")
     public String addUser(@RequestBody User user) {
         return usersService.saveUser(user);
     }
 
+    @CrossOrigin
     @DeleteMapping("")
     public String deleteUser(@RequestBody Integer userId) {
         return usersService.deleteUser(userId);
     }
 
-    @GetMapping(value="/{userId}")
-    @ResponseBody
-    public String getUser(@PathVariable("userId") Integer userId) {
-        return usersService.getUser(userId).getPassword();
+    @CrossOrigin
+    @GetMapping("")
+    public String getUser(@RequestBody String test) {
+        return test;
     }
 
+    @CrossOrigin
     @PutMapping("")
     public String updateUser(@RequestBody User user) {
         return usersService.updateUser(user);

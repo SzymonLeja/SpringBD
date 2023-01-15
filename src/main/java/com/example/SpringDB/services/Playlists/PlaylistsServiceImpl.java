@@ -39,9 +39,9 @@ public class PlaylistsServiceImpl implements PlaylistsService {
         }
     }
 
-//    @Override
-//    public List<Playlist> getPlaylist(Integer userId) {
-//        return playlistsRepository.findByUser_Id_user(userId);
-//    }
+    @Override
+    public List<Playlist> getPlaylist(Integer userId) {
+        return playlistsRepository.findByUserIdUser(userId);
+    }
 
 }

@@ -2,6 +2,7 @@ package com.example.SpringDB.entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
+import jdk.jfr.Name;
 import lombok.*;
 
 @Getter
@@ -17,12 +18,13 @@ public class Playlist {
     private String name;
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "id_user")
+    @JoinColumn(name = "idUser")
+    @Name("idUser")
     private User user;
 
-    @JsonProperty("id_user") private void unpackNested(Integer userId) {
+    @JsonProperty("idUser") private void unpackNested(Integer userId) {
         this.user = new User();
-        user.setId_user(userId);
+        user.setIdUser(userId);
     }
 
 

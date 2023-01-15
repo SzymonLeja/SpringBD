@@ -26,11 +26,11 @@ public class PlaylistController {
         return playlistsService.deletePlaylist(playlistId);
     }
 
-//    @GetMapping(value="/{userId}")
-//    @ResponseBody
-//    public List<Playlist> getPlaylist(@PathVariable("userId") Integer userId) {
-//        return playlistsService.getPlaylist(userId);
-//    }
+    @GetMapping("")
+    @ResponseBody
+    public List<Playlist> getPlaylist(@RequestBody Integer idUser) {
+        return playlistsService.getPlaylist(idUser);
+    }
 
     @PutMapping("")
     public String updatePlaylist(@RequestBody Playlist playlist) {
