@@ -1,40 +1,55 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Component} from 'react';
 import axios from 'axios';
 
 
-const LoginSite = () => {
-    const [login, setLogin] = useState({
-        "idUser": 152
-    });
+class LoginSite extends Component {
 
-    const handleChange = (e) => {
+    constructor(props) {
+        super(props)
+
+        this.state = {
+            username: '',
+            password: '',
+            hasLoginFailed: false,
+            showSuccessMessage: false
+        }
+
+        this.handleChange = this.handleChange.bind(this)
+        this.loginClicked = this.loginClicked.bind(this)
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        axios.get('http://localhost:8080/user', {
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            timeout: 0,
-            data: "{test:\"test\"}"
-
-        }).then(res => {
-            console.log(res.data);
-        }).catch(err => {
-            console.log(err);
-        });
+    handleChange(event) {
+        this.setState(
+            {
+                [event.target.name]: event.target.value
+            }
+        )
     }
 
-    return (
-        <div>
-                <label>Username</label>
-                <input type="text" name="username" onChange={handleChange} />
-                <label>Password</label>
-                <input type="password" name="password" onChange={handleChange} />
-                <button type="submit" onClick={handleSubmit}>Login</button>
-        </div>
-    );
+    loginClicked() {
+        axios.get('http://localhost:8080/user/' + this.state.username).then(
+            res => {
+                if (res.data.toString() === this.state.password) {
+                    console.log("success");
+                }
+            }
+        )
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>Login</h1>
+                <div className="container">
+                    {this.state.hasLoginFailed && <div className="alert alert-warning">Invalid Credentials</div>}
+                    {this.state.showSuccessMessage && <div>Login Sucessful</div>}
+                    User Name: <input type="text" name="username" value={this.state.username} onChange={this.handleChange} />
+                    Password: <input type="password" name="password" value={this.state.password} onChange={this.handleChange} />
+                    <button className="btn btn-success" onClick={this.loginClicked}>Login</button>
+                </div>
+            </div>
+        )
+    }
 }
 
 export default LoginSite;
