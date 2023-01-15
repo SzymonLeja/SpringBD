@@ -26,9 +26,9 @@ public class UserController {
     }
 
     @CrossOrigin
-    @GetMapping("")
-    public String getUser(@RequestBody String test) {
-        return test;
+    @GetMapping(value="/{username}")
+    public String getUser(@PathVariable("username") String username) {
+        return usersService.getUser(username).getPassword();
     }
 
     @CrossOrigin
