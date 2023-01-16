@@ -30,7 +30,7 @@ class LoginSite extends Component {
         axios.get('http://localhost:8080/user/' + this.state.username).then(
             res => {
                 if (res.data.toString() === this.state.password) {
-                    console.log("success");
+                    window.location.href = "http://localhost:3000/playersite";
                 }
             }
         )
