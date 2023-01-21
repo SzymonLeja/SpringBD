@@ -29,8 +29,8 @@ class LoginSite extends Component {
     loginClicked() {
         axios.get('http://localhost:8080/user/' + this.state.username).then(
             res => {
-                if (res.data.toString() === this.state.password) {
-                    window.location.href = "http://localhost:3000/playersite";
+                if(res.data.password === this.state.password){
+                    window.location.href = res.data.type === "moderator" ? "http://localhost:3000/songs" : "http://localhost:3000/playersite";
                 }
             }
         )

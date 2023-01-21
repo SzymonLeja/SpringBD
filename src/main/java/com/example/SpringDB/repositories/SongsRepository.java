@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public
 interface SongsRepository extends JpaRepository<Song, Integer> {
-    List<Song> findBySongNameContaining(String songName);
+    Song findBySongName(String songName);
 
 }

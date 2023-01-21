@@ -43,4 +43,8 @@ public class Song {
     public String toString() {
         return  "\n{\nid: " + id_song + ",\nsongName: " + songName + ",\nalbum: " + album.getAlbum_name() + ",\ngenre: " + genre.getGenre_name() + ",\ntime: " + time + ",\nsize: " + size + "\n}\n";
     }
+
+    public String getSongURL(){
+        return songURL;
+    }
 }

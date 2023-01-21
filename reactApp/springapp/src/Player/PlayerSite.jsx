@@ -79,8 +79,6 @@ function PlayerSite() {
                             value={search}
                             onChange={handleSearch}
                         />
-            <Button variant="contained" style={{marginTop: "10px", marginRight: "10px"}} onClick={uploadSound}>Upload</Button>
-            <input type="file" onChange={e => setFile(e.target.files[0])} />
             <Button variant="contained" style={{marginTop: "10px", marginRight: "10px"}} onClick={findSound}>Find</Button>
             <Button variant="contained" style={{marginTop: "10px", marginRight: "10px"}} onClick={playSound}>Play</Button>
             <Button variant="contained" style={{marginTop: "10px", marginRight: "10px"}} onClick={pauseSound}>Pause</Button>
