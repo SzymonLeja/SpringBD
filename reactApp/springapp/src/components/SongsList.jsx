@@ -11,6 +11,8 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import DeleteIcon from '@mui/icons-material/Delete';
+import fileDownload from 'js-file-download';
+
 
 function generateRandom() {
     var length = 8,
@@ -34,6 +36,8 @@ const useStyles = makeStyles({
 });
 
 const SongsList = () => {
+    const [file, setFile] = useState('');
+
     const classes = useStyles();
     const [songs, setSongs] = useState([]);
     const [search, setSearch] = useState('');
@@ -44,7 +48,7 @@ const SongsList = () => {
 
     const [activeSong, setActiveSong] = useState({
         id_song: 0,
-        title: '',
+        songName: '',
         duration: '',
         release_date: '',
         id_artist: 0,
@@ -89,6 +93,9 @@ const SongsList = () => {
         axios.put('http://localhost:8080/songs', activeSong)
             .then(res => {
                 console.log(res.data);
+                if(file != null){
+                    uploadSound();
+                }
                 setOpenDialog(false);
             })
             .catch(err => {
@@ -115,6 +122,9 @@ const SongsList = () => {
                 axios.get('http://localhost:8080/songs/all')
                 .then(resAll => {
                     setSongs(resAll.data);
+                    if(file != null){
+                        uploadSound()
+                    }
                     console.log("updated list")
                 })
                 console.log(res.data);
@@ -140,6 +150,18 @@ const SongsList = () => {
         return song.songName.toLowerCase().includes(search.toLowerCase());
     });
 
+
+    const uploadSound = () => {
+        console.log(file)
+        const formData = new FormData();
+        formData.append('file', file);
+        axios.post('http://localhost:8080/songs/upload', formData)
+        .then(res => {
+            console.log(res);
+            console.log(res.data);
+        })
+
+    }
     return (
         <div style={{ height: 400, width: '100%' }}>
             <DataGrid
@@ -188,8 +210,8 @@ const SongsList = () => {
                             label="Title"
                             variant="outlined"
                             size="small"
-                            value={activeSong.song_name}
-                            onChange={(e) => setActiveSong({ ...activeSong, song_name: e.target.value })}
+                            value={activeSong.songName}
+                            onChange={(e) => setActiveSong({ ...activeSong, songName: e.target.value })}
                             style={{ marginBottom: 20 }}
                         />
                         <TextField
@@ -232,6 +254,7 @@ const SongsList = () => {
                             onChange={(e) => setActiveSong({ ...activeSong, id_genre: e.target.value })}
                             style={{ marginBottom: 20 }}
                         />
+                    <input type="file" onChange={e => setFile(e.target.files[0])} />
                 </DialogContent>
                 <DialogActions>
                     <Button
@@ -310,6 +333,7 @@ const SongsList = () => {
                             onChange={(e) => setAddSong({ ...addSong, id_genre: e.target.value })}
                             style={{ marginBottom: 20 }}
                         />
+                        <input type="file" onChange={e => setFile(e.target.files[0])} />
                 </DialogContent>
                 <DialogActions>
                     <Button

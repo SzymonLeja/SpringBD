@@ -34,13 +34,15 @@ public class SongController {
     }
 
     @GetMapping("")
-    public List<Song> getSong(@RequestBody String songName) {
+    public Song getSong(@RequestBody String songName) {
         return songsService.getSong(songName);
     }
 
     @GetMapping(value="/{songName}")
     public ResponseEntity<Resource> getSongDownload(@PathVariable("songName") String songName) throws IOException {
-        File file = new File("C:\\Users\\Szymon\\Desktop\\BD2_PROJ\\src\\main\\resources\\music\\"+songName+".mp3");
+        String songURL = songsService.getSong(songName).getSongURL();
+//        String tempString = "C:\\Users\\Mateu\\Documents\\Java\\SpringBD\\src\\main\\resources\\music\\";
+        File file = new File(songURL);
         HttpHeaders header = new HttpHeaders();
         header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=metallica.mp3");
         header.add("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -49,11 +51,6 @@ public class SongController {
 
         Path path = Paths.get(file.getAbsolutePath());
         ByteArrayResource resource = new ByteArrayResource(Files.readAllBytes(path));
-
-        File output = new File("C:\\Users\\Szymon\\Desktop\\BD2_PROJ\\src\\main\\resources\\music\\metallicaXD.mp3");
-        try (FileOutputStream fos = new FileOutputStream(output)) {
-            fos.write(resource.getByteArray());
-        }
 
         return ResponseEntity.ok()
                 .headers(header)
@@ -65,7 +62,9 @@ public class SongController {
 
     @PostMapping(value="/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String uploadSong(@RequestParam MultipartFile file) throws IOException {
-        File convertFile = new File("C:\\Users\\Szymon\\Desktop\\BD2_PROJ\\src\\main\\resources\\music\\"+file.getOriginalFilename());
+        String tempString = "C:\\Users\\Mateu\\Documents\\Java\\SpringBD\\src\\main\\resources\\music\\";
+
+        File convertFile = new File(tempString+file.getOriginalFilename());
         convertFile.createNewFile();
         FileOutputStream fout = new FileOutputStream(convertFile);
         fout.write(file.getBytes());
