@@ -11,8 +11,13 @@ export const AuthProvider = ({ children }) => {
         localStorage.setItem('auth', JSON.stringify(auth));
     }, [auth]);
 
+    const logout = () => {
+        setAuth({});
+        localStorage.removeItem('auth');
+    };
+
     return (
-        <AuthContext.Provider value={{ auth, setAuth }}>
+        <AuthContext.Provider value={{ auth, setAuth, logout }}>
             {children}
         </AuthContext.Provider>
     );
