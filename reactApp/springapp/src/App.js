@@ -13,12 +13,8 @@ import PlayerSite from "./Player/PlayerSite";
 
 function App() {
   // is user logged in?
-  const [loggedIn, setLoggedIn] = React.useState(false);
-  const [user, setUser] = React.useState(null);
   
-
   return (
-      <div>
         <Routes>
           <Route exact path={"/login"} element={<LoginSite/>} />
 
@@ -32,7 +28,6 @@ function App() {
             <Route exact path={"/playersite"} element={<PlayerSite/>} />
           </Route>
         </Routes>
-      </div>
   );
 }
 
