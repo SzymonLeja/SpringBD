@@ -32,6 +32,12 @@ public class UserController {
     }
 
     @CrossOrigin
+    @GetMapping(value="/l/{username}")
+    public String getUser(@PathVariable("username") String username, @RequestParam String password) {
+        return usersService.getUser(username).getPassword().equals(password) ? "{" + usersService.getUser(username).getIdUser().toString() +"," + usersService.getUser(username).getUserName().toString()+ "," + usersService.getUser(username).getType().toString() + "}" : "false";
+    }
+
+    @CrossOrigin
     @PutMapping("")
     public String updateUser(@RequestBody User user) {
         return usersService.updateUser(user);

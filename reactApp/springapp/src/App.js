@@ -8,25 +8,31 @@ import SongsList from './components/SongsList';
 import AlbumsList from './components/AlbumsList';
 import LoginSite from './components/LoginSite';
 import UserPlaylists from "./components/UserPlaylists";
+import RequireAuth from './components/RequireAuth';
 import PlayerSite from "./Player/PlayerSite";
 
 function App() {
+  // is user logged in?
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [user, setUser] = React.useState(null);
+  
 
   return (
-    <Router>
       <div>
         <Routes>
-          <Route exact path={"/artists"} element={<ArtistsList/>} />
-          <Route exact path={"/songs"} element={<SongsList/>} />
-          <Route exact path={"/albums"} element={<AlbumsList/>} />
           <Route exact path={"/login"} element={<LoginSite/>} />
-          <Route exact path={"/playlists"} element={<UserPlaylists/>} />
-          <Route exact path={"/playersite"} element={<PlayerSite/>} />
 
-
+          <Route element={<RequireAuth allowedType={["moderator"]}/>} >
+            <Route exact path={"/artists"} element={<ArtistsList/>}  />
+            <Route exact path={"/songs"} element={<SongsList/>} />
+            <Route exact path={"/albums"} element={<AlbumsList/>} />
+            <Route exact path={"/playlists"} element={<UserPlaylists/>} />
+          </Route>
+          <Route element={<RequireAuth allowedType={["moderator", "user"]}/>} >
+            <Route exact path={"/playersite"} element={<PlayerSite/>} />
+          </Route>
         </Routes>
       </div>
-    </Router>
   );
 }
 

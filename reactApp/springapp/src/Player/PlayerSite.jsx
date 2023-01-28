@@ -38,9 +38,14 @@ function PlayerSite() {
 
     const handleSearch = (e) => {   
         setSearch(e.target.value);
+        audioCtx.suspend();
+
     }
 
     const findSound = () => {
+        audioCtx.suspend();
+        source.disconnect();
+        source = audioCtx.createBufferSource();
         axios.get('http://localhost:8080/songs/' + search, { responseType: 'arraybuffer' })
         .then(res => {
             audioCtx.decodeAudioData(res.data, (buffer) => {
