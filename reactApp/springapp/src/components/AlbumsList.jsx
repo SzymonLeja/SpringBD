@@ -44,13 +44,13 @@ const AlbumsList = () => {
     const [openAddDialog, setOpenAddDialog] = useState(false);
 
     const [activeAlbum, setActiveAlbum] = useState({
-        id_album: 0,
+        idAlbum: 0,
         title: ''
     });
 
     const [addAlbum, setAddAlbum] = useState({
         title: '',
-        id_artist: 0
+        idArtist: 0
     });
 
     useEffect(() => {
@@ -65,17 +65,15 @@ const AlbumsList = () => {
     }, []);
 
     const columns = [
-        { field: 'id_album', headerName: 'ID', width: 70 },
+        { field: 'idAlbum', headerName: 'ID', width: 70 },
         { field: 'title', headerName: 'Album', width: 200 },
         { field: 'artist', headerName: 'Artist', width: 200, valueGetter: (params) => `${params.row.artist.name}` },
     ];
 
     const handleDelete = () => {
-        axios.delete('http://localhost:8080/albums' + activeAlbum.id_album)
+        axios.delete('http://localhost:8080/albums' + activeAlbum.idAlbum)
             .then(res => {
-                console.log(res);
-                console.log(res.data);
-                setAlbums(albums.filter(album => album.id_album !== activeAlbum.id_album));
+                setAlbums(albums.filter(album => album.idAlbum !== activeAlbum.idAlbum));
             })
         setOpenDialog(false);
     }
@@ -96,7 +94,7 @@ const AlbumsList = () => {
             .then(res => {
                 console.log(res);
                 console.log(res.data);
-                setAlbums(albums.map(album => album.id_album === activeAlbum.id_album ? activeAlbum : album));
+                setAlbums(albums.map(album => album.idAlbum === activeAlbum.idAlbum ? activeAlbum : album));
             })
         setOpenDialog(false);
     }
@@ -153,7 +151,7 @@ const AlbumsList = () => {
                 onRowClick={handleOpenDialog}
                 onPageChange={handlePageChange}
                 onPageSizeChange={handleRowsPerPageChange}
-                getRowId={row => row.id_album}
+                getRowId={row => row.idAlbum}
                 
                 components={{
                     Toolbar: () => (

@@ -44,7 +44,7 @@ const ArtistsList = () => {
     const [openAddDialog, setOpenAddDialog] = useState(false);
 
     const [activeArtist, setActiveArtist] = useState({
-        id_artist: 0,
+        idArtist: 0,
         name: ''
     });
 
@@ -62,26 +62,26 @@ const ArtistsList = () => {
     }, []);
 
     const columns = [
-        { field: 'id_artist', headerName: 'ID', width: 70 },
+        { field: 'idArtist', headerName: 'ID', width: 70 },
         { field: 'name', headerName: 'Name', width: 130 },
     ];
 
     const handleFocusArtist = (artist) => {
         setActiveArtist({
-            id_artist: artist.id_artist,
+            idArtist: artist.idArtist,
             name: artist.name
         });
     }
 
     const handleChangeName = () => {
         const tempArtist = {
-            id_artist: activeArtist.id_artist,
+            idArtist: activeArtist.idArtist,
             name: activeArtist.name
         }
         axios.put('http://localhost:8080/artists', tempArtist)
             .then(res => {
                 artists.map(artist => {
-                    if (artist.id_artist === activeArtist.id_artist) {
+                    if (artist.idArtist === activeArtist.idArtist) {
                         artist.name = activeArtist.name;
                     }
                 });
@@ -90,11 +90,11 @@ const ArtistsList = () => {
             });
     }
     const handleDelete = () => {
-        console.log(activeArtist.id_artist)
-        axios.delete('http://localhost:8080/artists', { data: activeArtist.id_artist })
+        console.log(activeArtist.idArtist)
+        axios.delete('http://localhost:8080/artists', { data: activeArtist.idArtist })
             .then(res => {
                 artists.map((artist, index) => {
-                    if (artist.id_artist === activeArtist.id_artist) {
+                    if (artist.idArtist === activeArtist.idArtist) {
                         artists.splice(index, 1);
                     }
                 });
@@ -166,7 +166,7 @@ const ArtistsList = () => {
                         rowsPerPageOptions={[5, 10, 20]}
                         checkboxSelection
                         disableSelectionOnClick
-                        getRowId={(row) => row.id_artist}
+                        getRowId={(row) => row.idArtist}
                         //onRowClick display modal with edit and delete buttons
                         onRowClick={(row) => {
                             handleOpenDialog(row.row);

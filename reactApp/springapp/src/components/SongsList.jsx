@@ -136,7 +136,7 @@ const SongsList = () => {
     }
 
     const columns = [
-        { field: 'id_song', headerName: 'ID', width: 70 },
+        { field: 'idSong', headerName: 'ID', width: 70 },
         { field: 'songURL', headerName: 'URL', width: 150 },
         { field: 'songName', headerName: 'Title', width: 150 },
         { field: 'time', headerName: 'Duration', width: 150 },
@@ -178,7 +178,7 @@ const SongsList = () => {
                 }}
                 onPageChange={handlePageChange}
                 onPageSizeChange={handleRowsPerPageChange}
-                getRowId={(row) => row.id_song}
+                getRowId={(row) => row.idSong}
 
                 components={{
                     Toolbar: () => (
@@ -243,7 +243,7 @@ const SongsList = () => {
                             variant="outlined"
                             size="small"
                             value={activeSong.id_album}
-                            onChange={(e) => setActiveSong({ ...activeSong, id_album: e.target.value })}
+                            onChange={(e) => setActiveSong({ ...activeSong, idAlbum: e.target.value })}
                             style={{ marginBottom: 20 }}
                         />
                         <TextField
@@ -251,7 +251,7 @@ const SongsList = () => {
                             variant="outlined"
                             size="small"
                             value={activeSong.id_genre}
-                            onChange={(e) => setActiveSong({ ...activeSong, id_genre: e.target.value })}
+                            onChange={(e) => setActiveSong({ ...activeSong, idGenre: e.target.value })}
                             style={{ marginBottom: 20 }}
                         />
                     <input type="file" onChange={e => setFile(e.target.files[0])} />
@@ -322,7 +322,7 @@ const SongsList = () => {
                             variant="outlined"
                             size="small"
                             value={addSong.id_album}
-                            onChange={(e) => setAddSong({ ...addSong, id_album: e.target.value })}
+                            onChange={(e) => setAddSong({ ...addSong, idAlbum: e.target.value })}
                             style={{ marginBottom: 20 }}
                         />
                         <TextField
@@ -330,7 +330,7 @@ const SongsList = () => {
                             variant="outlined"
                             size="small"
                             value={addSong.id_genre}
-                            onChange={(e) => setAddSong({ ...addSong, id_genre: e.target.value })}
+                            onChange={(e) => setAddSong({ ...addSong, idGenre: e.target.value })}
                             style={{ marginBottom: 20 }}
                         />
                         <input type="file" onChange={e => setFile(e.target.files[0])} />

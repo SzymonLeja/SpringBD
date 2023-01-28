@@ -35,13 +35,6 @@ const LoginSite = () => {
                     })
                     setShowSuccessMessage(true);
                     setHasLoginFailed(false);
-                    console.log(from);
-                    console.log(location.state)
-                    console.log(                    setAuth({
-                        id: userData[0],
-                        username: userData[1],
-                        type: userData[2]
-                    }))
                     navigate(from, { replace: true });
                 } else {
                     setHasLoginFailed(true);
