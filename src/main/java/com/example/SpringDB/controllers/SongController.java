@@ -33,14 +33,14 @@ public class SongController {
         return songsService.saveSong(song);
     }
 
-    @GetMapping("")
-    public Song getSong(@RequestBody String songName) {
-        return songsService.getSong(songName);
-    }
+//    @GetMapping("")
+//    public Song getSong(@RequestBody String songName) {
+//        return songsService.getSong(songName);
+//    }
 
     @GetMapping(value="/{songName}")
-    public ResponseEntity<Resource> getSongDownload(@PathVariable("songName") String songName) throws IOException {
-        String songURL = songsService.getSong(songName).getSongURL();
+    public ResponseEntity<Resource> getSongDownload(@PathVariable("songName") String songId) throws IOException {
+        String songURL = songsService.getSong(Integer.parseInt(songId)).getSongURL();
 //        String tempString = "C:\\Users\\Mateu\\Documents\\Java\\SpringBD\\src\\main\\resources\\music\\";
         File file = new File(songURL);
         HttpHeaders header = new HttpHeaders();
@@ -62,7 +62,7 @@ public class SongController {
 
     @PostMapping(value="/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public String uploadSong(@RequestParam MultipartFile file) throws IOException {
-        String tempString = "C:\\Users\\Mateu\\Documents\\Java\\SpringBD\\src\\main\\resources\\music\\";
+        String tempString = "C:\\Users\\Szymon\\Desktop\\BD2_PROJ\\src\\main\\resources\\music\\";
 
         File convertFile = new File(tempString+file.getOriginalFilename());
         convertFile.createNewFile();
