@@ -30,11 +30,11 @@ public class SongsServiceImpl implements SongsService {
 
     @Override
     public String updateSong(Song song) {
-        if(songsRepository.existsById(song.getId_song())) {
+        if(songsRepository.existsById(song.getIdSong())) {
             songsRepository.save(song);
             return "Playlist updated";
         } else {
-            return "There is no playlist with id " + song.getId_song();
+            return "There is no playlist with id " + song.getIdSong();
         }
     }
 

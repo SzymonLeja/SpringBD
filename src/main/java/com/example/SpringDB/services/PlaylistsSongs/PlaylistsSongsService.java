@@ -8,7 +8,7 @@ public interface PlaylistsSongsService {
     public String savePlaylistSong(PlaylistSong playlistSong);
     public String deletePlaylistSong(Integer playlistSongId);
 
-//    List<PlaylistSong> getPlaylistSong(String playlistSongName);
+    List<PlaylistSong> getPlaylistSongs(Integer playlistId);
 
     String updatePlaylistSong(PlaylistSong playlistSong);
 }

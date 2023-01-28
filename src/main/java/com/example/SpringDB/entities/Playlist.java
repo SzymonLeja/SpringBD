@@ -14,7 +14,7 @@ import lombok.*;
 public class Playlist {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_playlist;
+    private Integer idPlaylist;
     private String name;
     @NonNull
     @ManyToOne

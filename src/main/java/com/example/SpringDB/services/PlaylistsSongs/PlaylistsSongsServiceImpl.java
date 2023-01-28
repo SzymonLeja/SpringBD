@@ -28,18 +28,18 @@ public class PlaylistsSongsServiceImpl implements PlaylistsSongsService {
         }
     }
 
-//    @Override
-//    public List<PlaylistSong> getPlaylistSong(String playlistSongName) {
-//        return playlistsSongsRepository.findBySongNameContaining(playlistSongName);
-//    }
+    @Override
+    public List<PlaylistSong> getPlaylistSongs(Integer playlistId) {
+        return playlistsSongsRepository.findByPlaylistIdPlaylist(playlistId);
+    }
 
     @Override
     public String updatePlaylistSong(PlaylistSong playlistSong) {
-        if(playlistsSongsRepository.existsById(playlistSong.getId_playlist_song())) {
+        if(playlistsSongsRepository.existsById(playlistSong.getIdPlaylistSong())) {
             playlistsSongsRepository.save(playlistSong);
             return "Playlist updated";
         } else {
-            return "There is no playlist with id " + playlistSong.getId_playlist_song();
+            return "There is no playlist with id " + playlistSong.getIdPlaylistSong();
         }
     }
 

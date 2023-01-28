@@ -26,10 +26,11 @@ public class PlaylistController {
         return playlistsService.deletePlaylist(playlistId);
     }
 
-    @GetMapping("")
+    @CrossOrigin
+    @GetMapping("/{userId}")
     @ResponseBody
-    public List<Playlist> getPlaylist(@RequestBody Integer idUser) {
-        return playlistsService.getPlaylist(idUser);
+    public List<Playlist> getPlaylist(@PathVariable String userId) {
+        return playlistsService.getPlaylistsByUserId(151);
     }
 
     @PutMapping("")

@@ -20,8 +20,8 @@ public class AlbumsServiceImpl implements AlbumsService {
     @Override
     public String saveAlbum(Album album) {
 
-        if(!artistsRepository.findById(album.getArtist().getId_artist()).isPresent()) {
-            return "There is no artist with id " + album.getArtist().getId_artist();
+        if(!artistsRepository.findById(album.getArtist().getIdArtist()).isPresent()) {
+            return "There is no artist with id " + album.getArtist().getIdArtist();
         } else {
             albumsRepository.save(album);
             return "Album added";
@@ -45,8 +45,8 @@ public class AlbumsServiceImpl implements AlbumsService {
 
     @Override
     public String updateAlbum(Album album) {
-        if(!albumsRepository.findById(album.getId_album()).isPresent()) {
-            return "There is no album with id " + album.getId_album();
+        if(!albumsRepository.findById(album.getIdAlbum()).isPresent()) {
+            return "There is no album with id " + album.getIdAlbum();
         } else {
             albumsRepository.save(album);
             return "Album updated";

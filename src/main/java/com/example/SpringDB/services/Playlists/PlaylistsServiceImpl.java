@@ -31,16 +31,21 @@ public class PlaylistsServiceImpl implements PlaylistsService {
 
     @Override
     public String updatePlaylist(Playlist playlist) {
-        if(playlistsRepository.existsById(playlist.getId_playlist())) {
+        if(playlistsRepository.existsById(playlist.getIdPlaylist())) {
             playlistsRepository.save(playlist);
             return "Playlist updated";
         } else {
-            return "There is no playlist with id " + playlist.getId_playlist();
+            return "There is no playlist with id " + playlist.getIdPlaylist();
         }
     }
 
+//    @Override
+//    public List<Playlist> getPlaylist(Integer userId) {
+//        return playlistsRepository.findByUserIdUser(userId);
+//    }
+
     @Override
-    public List<Playlist> getPlaylist(Integer userId) {
+    public List<Playlist> getPlaylistsByUserId(Integer userId) {
         return playlistsRepository.findByUserIdUser(userId);
     }
 

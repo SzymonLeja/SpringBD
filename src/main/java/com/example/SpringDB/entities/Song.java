@@ -15,33 +15,33 @@ import lombok.*;
 public class Song {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_song;
+    private Integer idSong;
     private String songURL;
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "id_album")
+    @JoinColumn(name = "idAlbum")
     private Album album;
 
     private String songName;
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "id_genre")
+    @JoinColumn(name = "idGenre")
     private Genre genre;
     private Time time;
     private Integer size;
 
-    @JsonProperty("id_album") private void unpackNested(Integer albumId) {
+    @JsonProperty("idAlbum") private void unpackNested(Integer albumId) {
         this.album = new Album();
-        album.setId_album(albumId);
+        album.setIdAlbum(albumId);
     }
-    @JsonProperty("id_genre") private void unpackNested2(Integer genreId) {
+    @JsonProperty("idGenre") private void unpackNested2(Integer genreId) {
         this.genre = new Genre();
-        genre.setId_genre(genreId);
+        genre.setIdGenre(genreId);
     }
 
     @Override
     public String toString() {
-        return  "\n{\nid: " + id_song + ",\nsongName: " + songName + ",\nalbum: " + album.getAlbum_name() + ",\ngenre: " + genre.getGenre_name() + ",\ntime: " + time + ",\nsize: " + size + "\n}\n";
+        return  "\n{\nid: " + idSong + ",\nsongName: " + songName + ",\nalbum: " + album.getAlbum_name() + ",\ngenre: " + genre.getGenre_name() + ",\ntime: " + time + ",\nsize: " + size + "\n}\n";
     }
 
     public String getSongURL(){

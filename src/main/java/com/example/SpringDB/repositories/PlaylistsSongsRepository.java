@@ -10,5 +10,5 @@ import java.util.List;
 public
 interface PlaylistsSongsRepository extends JpaRepository<PlaylistSong, Integer> {
 
-//    List<PlaylistSong> findBySongNameContaining(String playlistSongName);
+    List<PlaylistSong> findByPlaylistIdPlaylist(Integer playlistId);
 }

@@ -13,20 +13,20 @@ import lombok.*;
 
 public class Album {
     @Id
-    @Column(name = "id_album")
+    @Column(name = "idAlbum")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_album;
+    private Integer idAlbum;
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "id_artist")
+    @JoinColumn(name = "idArtist")
     private Artist artist;
     @Column(name = "title")
     private String title;
 
 
-    @JsonProperty("id_artist") private void unpackNested(Integer artistId) {
+    @JsonProperty("idArtist") private void unpackNested(Integer artistId) {
         this.artist = new Artist();
-        artist.setId_artist(artistId);
+        artist.setIdArtist(artistId);
     }
 
     public String getAlbum_name() {

@@ -32,11 +32,11 @@ public class GenresServiceImpl implements GenresService {
 
     @Override
     public String updateGenre(Genre genre) {
-        if(genresRepository.existsById(genre.getId_genre())) {
+        if(genresRepository.existsById(genre.getIdGenre())) {
             genresRepository.save(genre);
             return "Genre updated";
         } else {
-            return "There is no genre with id " + genre.getId_genre();
+            return "There is no genre with id " + genre.getIdGenre();
         }
     }
 

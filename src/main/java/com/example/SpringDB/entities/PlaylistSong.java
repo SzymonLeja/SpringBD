@@ -12,23 +12,23 @@ import lombok.*;
 public class PlaylistSong {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id_playlist_song;
+    private Integer idPlaylistSong;
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "id_playlist")
+    @JoinColumn(name = "idPlaylist")
     private Playlist playlist;
     @NonNull
     @ManyToOne
-    @JoinColumn(name = "id_song")
+    @JoinColumn(name = "idSong")
     private Song song;
 
-    @JsonProperty("id_playlist") private void unpackNested(Integer playlistId) {
+    @JsonProperty("idPlaylist") private void unpackNested(Integer playlistId) {
         this.playlist = new Playlist();
-        playlist.setId_playlist(playlistId);
+        playlist.setIdPlaylist(playlistId);
     }
-    @JsonProperty("id_song") private void unpackNested2(Integer songId) {
+    @JsonProperty("idSong") private void unpackNested2(Integer songId) {
         this.song = new Song();
-        song.setId_song(songId);
+        song.setIdSong(songId);
     }
 
 }
