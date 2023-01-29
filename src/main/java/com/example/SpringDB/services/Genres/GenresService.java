@@ -11,6 +11,7 @@ public interface GenresService {
 
     public String updateGenre(Genre genre);
 
+    public List<Genre> getGenresRepository();
     List<Genre> getGenre(String genreName);
 
 }

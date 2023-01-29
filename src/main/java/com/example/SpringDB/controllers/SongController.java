@@ -33,11 +33,50 @@ public class SongController {
         return songsService.saveSong(song);
     }
 
-//    @GetMapping("")
-//    public Song getSong(@RequestBody String songName) {
-//        return songsService.getSong(songName);
-//    }
+    @CrossOrigin
+    @GetMapping("/s/{songName}")
+    public Song getSong(@RequestBody String songName) {
+        return songsService.getSongByName(songName);
+    }
+    @CrossOrigin
+    @GetMapping("/g/{songId}")
+    public Song getSongById(@PathVariable("songId") Integer songId) {
+        return songsService.getSong(songId);
+    }
+    @CrossOrigin
+    @GetMapping("/album/{albumId}")
+    public List<Song> getSongByAlbumId(@PathVariable("albumId") Integer albumId) {
+        return songsService.getSongsByAlbum(albumId);
+    }
 
+    @CrossOrigin
+    @GetMapping("/artist/{artistId}")
+    public List<Song> getSongByArtistId(@PathVariable("artistId") Integer artistId) {
+        return songsService.getSongsByArtist(artistId);
+    }
+
+
+    @GetMapping(value="/i/{songId}")
+    public ResponseEntity<Resource> getSongIdDownload(@PathVariable("songId") Integer songId) throws IOException {
+        String songURL = songsService.getSong(songId).getSongURL();
+//        String tempString = "C:\\Users\\Mateu\\Documents\\Java\\SpringBD\\src\\main\\resources\\music\\";
+        File file = new File(songURL);
+        HttpHeaders header = new HttpHeaders();
+        header.add(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=metallica.mp3");
+        header.add("Cache-Control", "no-cache, no-store, must-revalidate");
+        header.add("Pragma", "no-cache");
+        header.add("Expires", "0");
+
+        Path path = Paths.get(file.getAbsolutePath());
+        ByteArrayResource resource = new ByteArrayResource(Files.readAllBytes(path));
+
+        return ResponseEntity.ok()
+                .headers(header)
+                .contentLength(file.length())
+                .contentType(MediaType.parseMediaType("application/octet-stream"))
+                .body(resource);
+
+    }
     @GetMapping(value="/{songName}")
     public ResponseEntity<Resource> getSongDownload(@PathVariable("songName") String songId) throws IOException {
         String songURL = songsService.getSong(Integer.parseInt(songId)).getSongURL();

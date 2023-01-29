@@ -31,6 +31,11 @@ class ArtistController {
         public List<Artist> getArtist(String artistName) {
             return artistsService.getArtist(artistName);
         }
+        @CrossOrigin
+        @GetMapping("/g/{artistId}")
+        public Artist getArtistById(@PathVariable("artistId") Integer artistId) {
+            return artistsService.getArtistById(artistId);
+        }
 
         @PutMapping("")
         public String updateArtist(@RequestBody Artist artist) {

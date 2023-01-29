@@ -13,6 +13,9 @@ import PlayerSite from "./Player/PlayerSite";
 import Home from "./components/Home";
 import Navmenu from "./nav/Navmenu";
 import Playlist from './components/Playlist';
+import Song from './components/Song';
+import Album from './components/Album';
+import Artists from './components/Artists';
 
 function App() {
   // is user logged in?
@@ -22,7 +25,7 @@ function App() {
           <Navmenu></Navmenu>
 
         <Routes>
-          <Route exact path={"/"} element={<Home/>} />
+          <Route exact path={"/"} element={<PlayerSite/>} />
           <Route exact path={"/login"} element={<LoginSite/>} />
 
           <Route element={<RequireAuth allowedType={["moderator"]}/>} >
@@ -31,9 +34,11 @@ function App() {
             <Route exact path={"/albums"} element={<AlbumsList/>} />
           </Route>
           <Route element={<RequireAuth allowedType={["moderator", "user"]}/>} >
-            <Route exact path={"/playersite"} element={<PlayerSite/>} />
             <Route exact path={"/playlists"} element={<UserPlaylists/>} />
             <Route exact path={"/playlist/:id"} element={<Playlist/>} />
+            <Route exact path={"/song/:id"} element={<Song/>} />
+            <Route exact path={"/album/:id"} element={<Album/>} />
+            <Route exact path={"/artist/:id"} element={<Artists />} />
 
           </Route>
         </Routes>

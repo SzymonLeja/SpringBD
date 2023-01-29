@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Service
 public class PlaylistsSongsServiceImpl implements PlaylistsSongsService {
@@ -14,8 +15,17 @@ public class PlaylistsSongsServiceImpl implements PlaylistsSongsService {
 
     @Override
     public String savePlaylistSong(PlaylistSong playlistSong) {
-        playlistsSongsRepository.save(playlistSong);
-        return "Playlist added";
+        AtomicReference<String> result = new AtomicReference<>("PlaylistSong saved");
+        playlistsSongsRepository.findBySongIdSongAndPlaylistIdPlaylist(playlistSong.getSong().getIdSong(), playlistSong.getPlaylist().getIdPlaylist()).ifPresentOrElse(
+                (playlistSong1) -> {
+                    result.set("PlaylistSong already exists");
+                    throw new RuntimeException("Song already in playlist");
+                },
+                () -> {
+                    playlistsSongsRepository.save(playlistSong);
+                }
+        );
+        return result.get();
     }
 
     @Override

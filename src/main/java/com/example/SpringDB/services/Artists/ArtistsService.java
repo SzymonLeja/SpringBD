@@ -13,5 +13,7 @@ public interface ArtistsService {
 
     public String updateArtist(Artist artist);
 
+    public Artist getArtistById(Integer artistId);
+
     List<Artist> getAllArtists();
 }

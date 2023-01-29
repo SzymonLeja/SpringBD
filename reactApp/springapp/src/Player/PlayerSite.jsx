@@ -3,6 +3,7 @@ import Button from '@mui/material/Button';
 import axios from 'axios';
 import fileDownload from 'js-file-download';
 import TextField from '@mui/material/TextField';
+import DynamicSearch from '../components/DynamicSearch';
 
 
 function PlayerSite() {
@@ -61,33 +62,11 @@ function PlayerSite() {
         )
     }
 
-    const uploadSound = () => {
-        console.log(file)
-        const formData = new FormData();
-        formData.append('file', file);
-        axios.post('http://localhost:8080/songs/upload', formData)
-        .then(res => {
-            console.log(res);
-            console.log(res.data);
-        })
-
-    }
 
 
     return (
         <div className="App">
-            <h3 className="mb-4">Play a mp3 file </h3>
-            <TextField
-                            label="Search"
-                            variant="outlined"
-                            size="small"
-                            value={search}
-                            onChange={handleSearch}
-                        />
-            <Button variant="contained" style={{marginTop: "10px", marginRight: "10px"}} onClick={findSound}>Find</Button>
-            <Button variant="contained" style={{marginTop: "10px", marginRight: "10px"}} onClick={playSound}>Play</Button>
-            <Button variant="contained" style={{marginTop: "10px", marginRight: "10px"}} onClick={pauseSound}>Pause</Button>
-
+            <DynamicSearch />
             {/* <Button variant="contained" style={{marginTop: "10px", marginRight: "10px"}} onClick={stopSound}>Stop</Button> */}
             {/* <Button variant="contained" style={{marginTop: "10px", marginRight: "10px"}} onClick={downloadSound}>Set</Button> */}
 

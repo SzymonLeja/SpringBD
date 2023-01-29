@@ -45,6 +45,9 @@ const SongsList = () => {
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [openDialog, setOpenDialog] = useState(false);
     const [openAddDialog, setOpenAddDialog] = useState(false);
+    const [albums, setAlbums] = useState([]);
+    const [genres, setGenre] = useState([]);
+
 
     const [activeSong, setActiveSong] = useState({
         id_song: 0,
@@ -135,6 +138,37 @@ const SongsList = () => {
             })
     }
 
+    const fetchAlbums = () => {
+        axios.get('http://localhost:8080/albums/all')
+            .then(res => {
+                setAlbums(res.data);
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    const fetchGenre = () => {
+        axios.get('http://localhost:8080/genres/all')
+            .then(res => {
+                setGenre(res.data);
+                console.log(res.data);
+            })
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+
+    const setAlbumId = (e) => {
+        setAddSong({
+            ...addSong,
+            idAlbum: e
+        })
+    }
+
+
     const columns = [
         { field: 'idSong', headerName: 'ID', width: 70 },
         { field: 'songURL', headerName: 'URL', width: 150 },
@@ -173,6 +207,8 @@ const SongsList = () => {
                 checkboxSelection
                 disableSelectionOnClick
                 onRowClick={(e) => {
+                    fetchAlbums();
+                    fetchGenre();
                     setActiveSong(e.row);
                     setOpenDialog(true);
                 }}
@@ -193,7 +229,10 @@ const SongsList = () => {
                         <Button
                             variant="contained"
                             color="primary"
-                            onClick={() => setOpenAddDialog(true)}
+                            onClick={() => 
+                                {fetchAlbums();
+                                fetchGenre();
+                                setOpenAddDialog(true)}}
                         >
                             Add
                         </Button>
@@ -238,22 +277,14 @@ const SongsList = () => {
                             onChange={(e) => setActiveSong({ ...activeSong, size: e.target.value })}
                             style={{ marginBottom: 20 }}
                         />
-                        <TextField
-                            label="Album"
-                            variant="outlined"
-                            size="small"
-                            value={activeSong.id_album}
-                            onChange={(e) => setActiveSong({ ...activeSong, idAlbum: e.target.value })}
-                            style={{ marginBottom: 20 }}
-                        />
-                        <TextField
-                            label="Genre"
-                            variant="outlined"
-                            size="small"
-                            value={activeSong.id_genre}
-                            onChange={(e) => setActiveSong({ ...activeSong, idGenre: e.target.value })}
-                            style={{ marginBottom: 20 }}
-                        />
+                            <select onChange={(e) => setAlbumId(e.target.value)}>
+                                <option value="0">Choose Album</option>
+                                {albums.map(album => <option key={album.idAlbum} value={album.idAlbum}>{album.title}</option>)}
+                            </select>
+                            <select onChange={(e) => setActiveSong({ ...activeSong, idGenre: e.target.value })}>
+                                <option value="0">Choose Genre</option>
+                                {genres.map(genre => <option key={genre.idGenre} value={genre.idGenre}>{genre.name}</option>)}
+                            </select>
                     <input type="file" onChange={e => setFile(e.target.files[0])} />
                 </DialogContent>
                 <DialogActions>
@@ -316,23 +347,15 @@ const SongsList = () => {
                             onChange={(e) => setAddSong({ ...addSong, size: e.target.value })}
                             style={{ marginBottom: 20 }}
                         />
-                        <TextField
 
-                            label="Album"
-                            variant="outlined"
-                            size="small"
-                            value={addSong.id_album}
-                            onChange={(e) => setAddSong({ ...addSong, idAlbum: e.target.value })}
-                            style={{ marginBottom: 20 }}
-                        />
-                        <TextField
-                            label="Genre"
-                            variant="outlined"
-                            size="small"
-                            value={addSong.id_genre}
-                            onChange={(e) => setAddSong({ ...addSong, idGenre: e.target.value })}
-                            style={{ marginBottom: 20 }}
-                        />
+                            <select onChange={(e) => setAlbumId(e.target.value)}>
+                                <option value="0">Choose Album</option>
+                                {albums.map(album => <option key={album.idAlbum} value={album.idAlbum}>{album.title}</option>)}
+                            </select>
+                            <select onChange={(e) => setActiveSong({ ...activeSong, idGenre: e.target.value })}>
+                                <option value="0">Choose Genre</option>
+                                {genres.map(genre => <option key={genre.idGenre} value={genre.idGenre}>{genre.name}</option>)}
+                            </select>
                         <input type="file" onChange={e => setFile(e.target.files[0])} />
                 </DialogContent>
                 <DialogActions>

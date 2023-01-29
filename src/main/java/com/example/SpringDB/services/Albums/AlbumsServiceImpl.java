@@ -44,6 +44,10 @@ public class AlbumsServiceImpl implements AlbumsService {
     }
 
     @Override
+    public List<Album> getAlbumsByArtistId(Integer artistId) {
+        return albumsRepository.findByArtistIdArtist(artistId);
+    }
+    @Override
     public String updateAlbum(Album album) {
         if(!albumsRepository.findById(album.getIdAlbum()).isPresent()) {
             return "There is no album with id " + album.getIdAlbum();
@@ -51,6 +55,11 @@ public class AlbumsServiceImpl implements AlbumsService {
             albumsRepository.save(album);
             return "Album updated";
         }
+    }
+
+    @Override
+    public Album getAlbumById(Integer albumId) {
+        return albumsRepository.findByIdAlbum(albumId);
     }
 
     @Override

@@ -33,5 +33,10 @@ public class Album {
         return title;
     }
 
+    @Override
+    public String toString() {
+        return  "\n{\nid: " + idAlbum + ",\nalbumName: " + title + ",\nartist: " + artist.getArtistName() + "\n}";
+    }
+
 
 }

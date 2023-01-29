@@ -29,8 +29,8 @@ public class PlaylistController {
     @CrossOrigin
     @GetMapping("/{userId}")
     @ResponseBody
-    public List<Playlist> getPlaylist(@PathVariable String userId) {
-        return playlistsService.getPlaylistsByUserId(151);
+    public List<Playlist> getPlaylist(@PathVariable("userId") Integer userId) {
+        return playlistsService.getPlaylistsByUserId(userId);
     }
 
     @PutMapping("")

@@ -18,4 +18,12 @@ public class Artist {
     private Integer idArtist;
     private String name;
 
+    public String getArtistName() {
+        return name;
+    }
+
+    @Override
+    public String toString() {
+        return  "\n{\nid: " + idArtist + ",\nartistName: " + name + "\n}";
+    }
 }

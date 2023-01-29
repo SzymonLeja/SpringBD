@@ -43,6 +43,23 @@ public class SongsServiceImpl implements SongsService {
         return songsRepository.findByIdSong(songId);
     }
 
+    @Override
+    public Song getSongByName(String songName) {
+        return songsRepository.findBySongName(songName);
+    }
+    @Override
+    public List<Song> getSongsByName(String songName) {
+        return songsRepository.findBySongNameContaining(songName);
+    }
+    @Override
+    public List<Song> getSongsByAlbum(Integer albumId) {
+        return songsRepository.findByAlbumIdAlbum(albumId);
+    }
+
+    @Override
+    public List<Song> getSongsByArtist(Integer artistId) {
+        return songsRepository.findByAlbumArtistIdArtist(artistId);
+    }
     public List<Song> getSongsRepository() {
         return songsRepository.count() > 0 ? songsRepository.findAll() : null;
     }

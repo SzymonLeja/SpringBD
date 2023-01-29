@@ -4,6 +4,7 @@ import axios from 'axios';
 import useAuth from '../hooks/useAuth';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import DynamicSearch from './DynamicSearch';
 
 const Playlist = () => {
     const [search, setSearch] = useState('');
@@ -34,7 +35,6 @@ const Playlist = () => {
 
     useEffect(() => {
         if(songs.length != 0){
-            console.log(songs)
             let getSongId = songs[activeSong].idSong;
             console.log(getSongId);
             axios.get(`http://localhost:8080/songs/${getSongId}`, { responseType: 'arraybuffer' })
@@ -53,6 +53,7 @@ const Playlist = () => {
         }
 
     }, [songs, activeSong])
+
 
     const playSound = () => {
         audioCtx.resume();
@@ -76,20 +77,17 @@ const Playlist = () => {
         }
     }
 
-
-    
-
     return (
         <div>
             <h1>Playlist</h1>
             <div className="container">
-            <h3 className="mb-4">Currently playing: {songs[activeSong]?.album.artist.name + " - " + songs[activeSong].songName}</h3>
-
+            <h3 className="mb-4">Currently playing: {songs[activeSong]?songs[activeSong].album.artist.name + " - " + songs[activeSong].songName: null}</h3>
+            <DynamicSearch/>
             <Button variant="contained" style={{marginTop: "10px", marginRight: "10px"}} onClick={prevSound}>Prev</Button>
             <Button variant="contained" style={{marginTop: "10px", marginRight: "10px"}} onClick={playSound}>Play</Button>
             <Button variant="contained" style={{marginTop: "10px", marginRight: "10px"}} onClick={pauseSound}>Pause</Button>
             <Button variant="contained" style={{marginTop: "10px", marginRight: "10px"}} onClick={nextSound}>Next</Button>
-            {songs.map(song => <div key={song.idSong}><Button variant="contained" style={{marginTop: "10px", marginRight: "10px"}} onClick={() => setActiveSong(songs.indexOf(song))}>{song.songName}</Button></div>)}
+            {songs.map(song => <div key={song.idSong}><Button variant="contained" style={{marginTop: "10px", marginRight: "10px"}} onClick={() => {pauseSound(); setActiveSong(songs.indexOf(song))}}>{song.songName}</Button></div>)}
 
             </div>
         </div>

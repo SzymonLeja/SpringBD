@@ -26,9 +26,21 @@ class AlbumController {
     }
 
     @CrossOrigin
-    @GetMapping("")
-    public List<Album> getAlbum(@RequestBody String albumName) {
+    @GetMapping("/{id}")
+    public List<Album> getAlbum(@PathVariable("id") String albumName) {
         return albumsService.getAlbum(albumName);
+    }
+
+    @CrossOrigin
+    @GetMapping("/g/{id}")
+    public Album getAlbumById(@PathVariable("id") Integer albumId) {
+        return albumsService.getAlbumById(albumId);
+    }
+
+    @CrossOrigin
+    @GetMapping("/artist/{id}")
+    public List<Album> getAlbumsByArtistId(@PathVariable("id") Integer artistId) {
+        return albumsService.getAlbumsByArtistId(artistId);
     }
 
     @CrossOrigin

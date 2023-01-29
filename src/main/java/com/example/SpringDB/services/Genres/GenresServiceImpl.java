@@ -41,6 +41,10 @@ public class GenresServiceImpl implements GenresService {
     }
 
     @Override
+    public List<Genre> getGenresRepository() {
+        return genresRepository.count() > 0 ? genresRepository.findAll() : null;
+    }
+    @Override
     public List<Genre> getGenre(String genreName) {
         return genresRepository.findByNameContaining(genreName);
     }

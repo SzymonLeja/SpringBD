@@ -31,6 +31,11 @@ class GenreController {
             return genresService.getGenre(genreName);
         }
 
+        @GetMapping("/all")
+        public List<Genre> getGenres() {
+            return genresService.getGenresRepository();
+        }
+
         @PutMapping("")
         public String updateGenre(@RequestBody Genre genre) {
             return genresService.updateGenre(genre);
