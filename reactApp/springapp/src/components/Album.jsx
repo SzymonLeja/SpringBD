@@ -115,6 +115,13 @@ const Album = () => {
 
                                     </CardContent>
                                 </CardActionArea>
+                                <CardActions>
+                                <Link to={`/song/${song.idSong}`}>
+                                <Button size="small" color="primary">
+                                    View
+                                </Button>
+                            </Link>
+                                </CardActions>
                             </Card>
                         </Grid>
                     ))}

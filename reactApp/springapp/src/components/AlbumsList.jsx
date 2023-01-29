@@ -42,6 +42,10 @@ const AlbumsList = () => {
     const [rowsPerPage, setRowsPerPage] = useState(10);
     const [openDialog, setOpenDialog] = useState(false);
     const [openAddDialog, setOpenAddDialog] = useState(false);
+    const [artists, setArtists] = useState([]);
+    const [fetch, setFetch] = useState(true);
+    const rows = albums.filter(album => album.title.toLowerCase().includes(search.toLowerCase()))
+    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
     const [activeAlbum, setActiveAlbum] = useState({
         idAlbum: 0,
@@ -56,13 +60,25 @@ const AlbumsList = () => {
     useEffect(() => {
         axios.get('http://localhost:8080/albums/all')
             .then(res => {
-                console.log(res);
                 setAlbums(res.data);
+                setFetch(false);
+            }).catch(err => {
+                console.log(err);
+            }
+            )
+    }, [fetch]);
+
+    useEffect(() => {
+        axios.get('http://localhost:8080/artists/all')
+            .then(res => {
+                console.log(res.data);
+                setArtists(res.data);
             }).catch(err => {
                 console.log(err);
             }
             )
     }, []);
+
 
     const columns = [
         { field: 'idAlbum', headerName: 'ID', width: 70 },
@@ -82,9 +98,14 @@ const AlbumsList = () => {
         console.log(addAlbum);
         axios.post('http://localhost:8080/albums', addAlbum)
             .then(res => {
-                console.log(res);
-                console.log(res.data);
-                setAlbums([...albums, res.data]);
+                axios.get('http://localhost:8080/albums/all')
+                    .then(res => {
+                        setAlbums(res.data);
+                    }).catch(err => {
+                        console.log(err);
+                    }
+                    )
+                setFetch(true);
             })
         setOpenAddDialog(false);
     }
@@ -92,7 +113,6 @@ const AlbumsList = () => {
     const handleEdit = () => {
         axios.put('http://localhost:8080/albums', activeAlbum)
             .then(res => {
-                console.log(res);
                 console.log(res.data);
                 setAlbums(albums.map(album => album.idAlbum === activeAlbum.idAlbum ? activeAlbum : album));
             })
@@ -134,8 +154,7 @@ const AlbumsList = () => {
         setAddAlbum({ ...addAlbum, [e.target.name]: e.target.value });
     }
 
-    const rows = albums.filter(album => album.title.toLowerCase().includes(search.toLowerCase()))
-        .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
+    
         
 
     return (
@@ -222,17 +241,13 @@ const AlbumsList = () => {
                         fullWidth
                         onChange={handleAddAlbum}
                     />
-                    <TextField
-
-                        autoFocus
-                        margin="dense"
-                        id="id_artist"
-                        label="Artist"
-                        type="text"
-                        name="id_artist"
-                        fullWidth
-                        onChange={handleAddAlbum}
-                    />
+                            <select onChange={(e) => {
+                                console.log(addAlbum)
+                                setAddAlbum({ ...addAlbum, idArtist: e.target.value })
+                            }}>
+                                <option value="0">Choose Artist</option>
+                                {artists.map(artist => <option key={artist.idArtist} value={artist.idArtist}>{artist.name}</option>)}
+                            </select>
 
                 </DialogContent>
                 <DialogActions>
